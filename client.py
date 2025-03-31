@@ -9,17 +9,13 @@ def start_client():
 
     print("Connected to the server!")
 
+    server_message = client_socket.recv(1024).decode()
+    print(server_message)
+
     try:
         while True:
-            server_message = client_socket.recv(1024).decode()
-            print(server_message)
 
-            user_input = input("Enter your input: ").strip()
 
-            client_socket.send(user_input.encode())
-
-            server_response = client_socket.recv(1024).decode()
-            print(server_response)
 
             if user_input.lower() == "exit":
                 print("Exiting the game...")
@@ -27,9 +23,9 @@ def start_client():
 
     except Exception as e:
         print(f"An error occurred: {e}")
-    finally:
-        client_socket.close()
-        print("Connection closed.")
+
+    client_socket.close()
+    print("Connection closed.")
 
 if __name__ == "__main__":
     start_client()

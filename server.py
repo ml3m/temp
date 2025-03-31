@@ -8,17 +8,16 @@ def handle_client(connection):
     conn, addr = connection
     print(f"Connected to {addr}")
 
+    conn.send("Welcome to the game! \n Enter your input:".encode())
+
     try:
         while True:
-            conn.send("Welcome to the game! Enter your input:".encode())
-
-            client_message = conn.recv(1024).decode()
 
     except Exception as e:
         print(f"Error with client {addr}: {e}")
-    finally:
-        conn.close()
-        print(f"Connection with {addr} closed.")
+
+    conn.close()
+    print(f"Connection with {addr} closed.")
 
 def start_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
